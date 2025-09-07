@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Malek Waleed - AI Engineer & Data Scientist specializing in data pipelines, machine learning, and AI applications." />
+  <meta name="keywords" content="AI Engineer, Data Scientist, Machine Learning, Data Pipelines, Python, SQL, Docker, Apache Airflow" />
+  <title>Malek Waleed — AI Engineer & Data Scientist</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0f0f10;          
+      --card:#161618;        
+      --accent:#ff7a00;      
+      --accent-2:#ff9440;    
+      --text:#f5f5f7;        
+      --muted:#b6b6b8;
+      --ring: 0 0 0 3px rgba(255,122,0,.25);
+      --radius: 18px;
+      --gap: clamp(16px, 2.5vw, 24px);
+      --max: 1200px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;scroll-behavior:smooth;line-height:1.6;}
+    a{color:inherit;text-decoration:none;transition:var(--transition);}
+    img{max-width:100%;display:block;height:auto;}
+    button {cursor:pointer;}
+
+    body, h1, h2, h3, h4, h5, h6, p, span, div, a, strong {
+      user-select: none;
+      cursor: default;
+    }
+    input, textarea, button, select {
+      user-select: text;
+      cursor: text;
+      font-family: inherit;
+    }
+
+    /* Enable text selection for message textarea */
+    #msg {
+      user-select: text;
+      cursor: text;
+    }
+
+    .wrap{max-width:var(--max);margin-inline:auto;padding:0 clamp(16px, 4vw, 40px)}
+    section{position:relative; padding: clamp(64px, 10vw, 120px) 0;border-top:1px solid #202022; overflow: hidden;}
+    .grid{display:grid;gap:var(--gap)}
+    .two{grid-template-columns:1.1fr .9fr}
+    @media (max-width:900px){.two{grid-template-columns:1fr}}
+
+    .diamond-flow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25; 
+    }
+    
+    .diamond {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: diamondFlow 20s linear infinite;
+    }
+    
+    @keyframes diamondFlow {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px) rotate(45deg) scale(0.5);
+      }
+      5% {
+        opacity: 0.8; 
+      }
+      10% {
+        opacity: 0.5; 
+      }
+      20% {
+        opacity: 0.8; 
+      }
+      30% {
+        opacity: 0.6; 
+      }
+      40% {
+        opacity: 0.9; 
+      }
+      50% {
+        opacity: 0.5; 
+        transform: translateY(50vh) rotate(45deg) scale(1.2); 
+      }
+      60% {
+        opacity: 0.8; 
+      }
+      70% {
+        opacity: 0.6; 
+      }
+      80% {
+        opacity: 0.9; 
+      }
+      90% {
+        opacity: 0.5; 
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(45deg) scale(1.8); 
+      }
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav{
+      position:sticky;top:0;z-index:10;background:rgba(15,15,16,.95);
+      backdrop-filter:saturate(120%) blur(12px);border-bottom:1px solid #1b1b1d;
+      transition: var(--transition);
+    }
+    .nav.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .nav .inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.5px;font-size:1.2rem;background:var(--accent);color:#111;padding:10px 20px;border-radius:12px; transition: var(--transition);}
+    .brand:hover{background:var(--accent-2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,122,0,0.3);}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:#111;box-shadow:0 0 18px rgba(0,0,0,0.3)}
+    .links{display:flex;gap:24px;align-items:center}
+    .links a{opacity:.9;font-weight:600; transition: var(--transition); position:relative;}
+    .links a:not(.cta):after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    .links a:hover{color:var(--accent); transform: translateY(-2px);}
+    .links a:hover:after {
+      width: 100%;
+    }
+    .cta{background:var(--accent);color:#111;padding:10px 20px;border-radius:12px;font-weight:700; transition: var(--transition);}
+    .cta:hover{background:var(--accent-2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,122,0,0.3);}
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+    
+    .menu-toggle span {
+      width: 2rem;
+      height: 0.25rem;
+      background: var(--text);
+      border-radius: 10px;
+      transition: var(--transition);
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        height: calc(100vh - 70px);
+        width: 100%;
+        background: var(--bg);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 3rem;
+        gap: 2.5rem;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      
+      .links.open {
+        transform: translateX(0);
+      }
+
+      .brand {
+        padding: 8px 16px;
+        font-size: 1rem;
+      }
+    }
+
+    .hero{display:grid;gap:var(--gap);grid-template-columns:1.2fr .8fr;align-items:center;min-height:90vh;}
+    @media (max-width:900px){.hero{grid-template-columns:1fr; text-align:center;}}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:#1d1d20;border:1px solid #2a2a2e;padding:8px 16px;border-radius:999px;color:#ddd;font-size:.9rem; transition: var(--transition);}
+    .badge:hover {transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+    .badge i{color:var(--accent)}
+    .title{font-size: clamp(32px, 5vw, 64px);line-height:1.05;margin:18px 0 12px;font-weight:800}
+    .subtitle{font-size: clamp(16px, 2.2vw, 22px);color:var(--muted);max-width:58ch; margin-bottom: 1.5rem;}
+    .social{display:flex;gap:12px;margin-top:24px; justify-content: flex-start;}
+    @media (max-width:900px){.social{justify-content: center;}}
+    .social a{
+      display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;
+      border-radius:12px;border:1px solid #2a2a2e;background:#17171a; transition: var(--transition);
+    }
+    .social a:hover{outline:var(--ring);color:var(--accent); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.2);}
+    .heroCard{
+      position:relative;background:var(--card);
+      border:1px solid #242428;border-radius:var(--radius);padding:28px; transition: var(--transition);
+      box-shadow:0 0 0 1px #1b1b1d, 0 20px 60px rgba(0,0,0,.35);
+      overflow: hidden; transition: var(--transition);
+    }
+    .heroCard:hover {
+      box-shadow: 0 0 0 1px #1b1b1d, 0 25px 80px rgba(255,122,0,0.15);
+      transform: translateY(-5px);
+    }
+    .heroCard img{border-radius:var(--radius);object-fit:cover;width:100%;height:100%; transition: transform 0.5s ease;}
+    .heroCard:hover img {transform: scale(1.05);}
+    .chip{position:absolute;left:8%;bottom:10%;background:#121214;border:1px solid #2a2a2e;border-radius:12px;padding:10px 16px;font-size:.9rem; z-index: 3; transition: var(--transition);}
+    .chip:hover {transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.2);}
+    .chip i{color:var(--accent);margin-right:8px}
+
+    .card{background:var(--card);border:1px solid #232327;border-radius:var(--radius);padding:28px; transition: var(--transition);}
+    .card:hover {transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); border-color: rgba(255,122,0,0.2);}
+    .btn{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:12px 20px;font-weight:700;border:1px solid #2a2a2e;background:#17171a;color:var(--text); transition: var(--transition);}
+    .btn:hover{outline:var(--ring); transform: translateY(-2px);}
+    .btn.accent{background:var(--accent);color:#111;border-color:transparent}
+    .btn.accent:hover{box-shadow:0 6px 30px rgba(255,122,0,.35); transform: translateY(-2px);}
+
+    .section-title{font-size: clamp(24px, 2.5vw, 36px);margin:0 0 18px;font-weight:800; position:relative; display:inline-block;background:var(--accent);color:#111;padding:8px 16px;border-radius:10px;}
+    .section-title:after {
+      display: none;
+    }
+    .muted{color:var(--muted); line-height:1.6;}
+
+    .services{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
+    @media (max-width:1000px){.services{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:650px){.services{grid-template-columns:1fr}}
+    .service h3{margin:0 0 12px;font-size:1.2rem}
+    .service p{margin:8px 0 0;color:var(--muted); line-height:1.6;}
+    .service i{color:var(--accent);margin-right:10px; font-size:1.2rem;}
+
+    .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+    .tab{
+      padding:10px 18px;border-radius:12px;border:1px solid #2a2a2e;background:#17171a;cursor:pointer;font-weight:700; transition: var(--transition);
+    }
+    .tab[aria-selected="true"]{background:var(--accent);color:#111;border-color:transparent; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,122,0,0.2);}
+    .tab:hover:not([aria-selected="true"]) {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .proj-desc{line-height:1.7;color:var(--muted); margin-bottom: 1.5rem;}
+    .proj-name{font-weight:800;margin:0 0 12px; font-size: 1.4rem;}
+
+    .contact{display:grid;gap:var(--gap);grid-template-columns:1fr 1fr}
+    @media (max-width:900px){.contact{grid-template-columns:1fr}}
+    .field{display:grid;gap:8px;margin-bottom:18px}
+    .input, .textarea{
+      background:#141417;border:1px solid #2a2a2e;border-radius:12px;padding:14px 16px;color:var(--text); transition: var(--transition);
+      font-size: 1rem;
+    }
+    .input:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,122,0,0.2);
+    }
+    .textarea{min-height:140px;resize:vertical}
+    .pill{display:inline-flex;align-items:center;gap:12px;background:#151518;border:1px solid #2a2a2e;padding:12px 16px;border-radius:12px; transition: var(--transition); margin-bottom: 12px;}
+    .pill:hover {transform: translateX(5px); border-color: var(--accent); box-shadow: 0 6px 16px rgba(0,0,0,0.15);}
+    .pill i{color:var(--accent); font-size: 1.1rem;}
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .skill-item {
+      background: #17171a;
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .skill-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    footer{padding:40px 0;color:#9a9a9d;border-top:1px solid #202022; text-align: center;}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 99;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      background: var(--accent-2);
+      box-shadow: 0 6px 25px rgba(255,122,0,0.3);
+    }
+
+    /* Section navigation icons */
+    .section-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .section-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid #2a2a2e;
+      background: #17171a;
+      transition: var(--transition);
+      color: var(--text);
+    }
+    
+    .section-nav a:hover {
+      outline: var(--ring);
+      color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+    /* Enable text selection for specific elements */
+    .input, .textarea, .tab, .btn, .cta, .skill-item, .service, .card, .pill {
+      user-select: none;
+      cursor: default;
+    }
+
+    /* Allow text selection in textareas and inputs */
+    textarea, input {
+      user-select: text;
+      cursor: text;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="wrap inner">
+      <a href="#home" class="brand">
+        <span class="dot"></span>
+        <span>Malek Waleed</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="cta"><b>Let's Connect</b></a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="root" class="wrap"></main>
+
+  <button class="scroll-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    function DiamondFlow() {
+      const containerRef = useRef(null);
+      
+      useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        const width = container.offsetWidth;
+        const height = container.offsetHeight;
+        const diamondCount = Math.floor((width * height) / 2000); 
+        
+        for (let i = 0; i < diamondCount; i++) {
+          const diamond = document.createElement('div');
+          diamond.className = 'diamond';
+          
+          const left = Math.random() * 100;
+          const delay = Math.random() * 15; 
+          const duration = 15 + Math.random() * 10; 
+          
+          diamond.style.left = `${left}%`;
+          diamond.style.animationDelay = `${delay}s`;
+          diamond.style.animationDuration = `${duration}s`;
+          
+          const size = 8 + Math.random() * 8;
+          diamond.style.width = `${size}px`;
+          diamond.style.height = `${size}px`;
+          
+          container.appendChild(diamond);
+        }
+      }, []);
+      
+      return <div ref={containerRef} className="diamond-flow"></div>;
+    }
+
+    function SectionNav() {
+      return (
+        <div className="section-nav fade-in">
+          <a href="#about" title="About"><i className="fa-solid fa-user"></i></a>
+          <a href="#skills" title="Skills"><i className="fa-solid fa-code"></i></a>
+          <a href="#services" title="Services"><i className="fa-solid fa-gear"></i></a>
+          <a href="#projects" title="Projects"><i className="fa-solid fa-diagram-project"></i></a>
+          <a href="#contact" title="Contact"><i className="fa-solid fa-envelope"></i></a>
+        </div>
+      );
+    }
+
+    function SectionTitle({kicker, title, sub, showNav = false}){
+      return (
+        <header style={{marginBottom:16}} className="fade-in">
+          {kicker && <div className="badge"><i className="fa-solid fa-bolt"></i>{kicker}</div>}
+          <h2 className="section-title">{title}</h2>
+          {sub && <p className="muted">{sub}</p>}
+          {showNav && <SectionNav />}
+        </header>
+      );
+    }
+
+    function Hero(){
+      return (
+        <section id="home" className="grid hero" aria-label="Home">
+          <DiamondFlow />
+          <div className="content-wrapper">
+            <span className="badge fade-in"><i className="fa-solid fa-code"></i> AI Engineer & Data Scientist</span>
+            <h1 className="title fade-in delay-1">Hello, I'm <span style={{color:'var(--accent)'}}>Malek Waleed</span></h1>
+            <p className="subtitle fade-in delay-1">I build intelligent, data-driven products and delightful web experiences with a focus on AI engineering and data science.</p>
+
+            <div className="social" aria-label="Social links">
+              <a href="https://www.linkedin.com/in/malek-waleed12" target="_blank" rel="noreferrer" title="LinkedIn" className="fade-in delay-2"><i className="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://github.com/malekwaleed09" target="_blank" rel="noreferrer" title="GitHub" className="fade-in delay-2"><i className="fa-brands fa-github"></i></a>
+              <a href="https://wa.me/201200703062" target="_blank" rel="noreferrer" title="WhatsApp" className="fade-in delay-2"><i className="fa-brands fa-whatsapp"></i></a>
+              <a href="assets/Malek Waleed Resume.pdf" title="Download CV" className="fade-in delay-2"><i className="fa-solid fa-file-arrow-down"></i></a>
+            </div>
+
+            <div style={{display:'flex',gap:12,marginTop:18,flexWrap:'wrap'}}>
+              <a className="btn accent fade-in delay-3" href="#contact"><i className="fa-regular fa-paper-plane"></i>Let's Connect</a>
+              <a className="btn fade-in delay-3" href="#projects"><i className="fa-solid fa-diagram-project"></i>View Projects</a>
+            </div>
+          </div>
+
+          <aside className="heroCard fade-in delay-2">
+            <img src="assets/malek_photo.jpeg" alt="Malek Waleed portrait" />
+          </aside>
+        </section>
+      );
+    }
+
+    function About(){
+      return (
+        <section id="about">
+          <DiamondFlow />
+          <div className="content-wrapper">
+            <SectionTitle kicker="About" title="Who I Am" showNav={true} />
+            <div className="card" style={{lineHeight:1.7}}>
+              <p>I'm an aspiring <strong>Data Engineer</strong> with nearly one year of hands-on experience in
+              data analysis, machine learning, and project development. Proficient in <strong>Python</strong> and <strong>SQL</strong>,
+              with working knowledge of <strong>Docker</strong> and <strong>Apache Airflow</strong>.</p>
+              
+              <p>Experienced in building <strong>ETL processes</strong>, <strong>data pipelines</strong>, and <strong>database management systems</strong> through multiple data science projects.
+              Strong in problem-solving, communication, and team leadership.</p>
+              
+              <p>Eager to apply and expand my skills in a dynamic,
+              growth-oriented environment that values continuous learning and innovation.</p>
+              
+              <div style={{marginTop:24}}>
+                <a className="btn accent" href="#contact"><i className="fa-regular fa-handshake"></i>Let's Connect</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Skills() {
+      const skills = [
+        { name: "Python", icon: "fa-brands fa-python" },
+        { name: "SQL", icon: "fa-solid fa-database" },
+        { name: "Docker", icon: "fa-brands fa-docker" },
+        { name: "Apache Airflow", icon: "fa-solid fa-wind" },
+        { name: "Machine Learning", icon: "fa-solid fa-brain" },
+        { name: "Data Analysis", icon: "fa-solid fa-chart-simple" },
+        { name: "ETL Processes", icon: "fa-solid fa-gears" },
+        { name: "Data Visualization", icon: "fa-solid fa-chart-line" }
+      ];
+      
+      return (
+        <section id="skills">
+          <DiamondFlow />
+          <div className="content-wrapper">
+            <SectionTitle kicker="Skills" title="Technical Expertise" sub="Technologies and tools I work with" showNav={true} />
+            <div className="skills-grid">
+              {skills.map((skill, index) => (
+                <div key={index} className="skill-item fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+                  <i className={skill.icon} style={{fontSize: '1.8rem', marginBottom: '8px', color: 'var(--accent)'}}></i>
+                  <div>{skill.name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Services(){
+      const items = [
+        {
+          title:"Data Collection & Cleaning",
+          icon:"fa-database",
+          lines:[
+            "Gather raw data from databases, APIs, or web scraping.",
+            "Handle missing values, duplicates, and inconsistencies."
+          ]
+        },
+        {
+          title:"Business Intelligence & Reporting",
+          icon:"fa-chart-line",
+          lines:[
+            "Build dashboards (Power BI, Tableau, Looker, etc.).",
+            "Generate regular business reports for decision-making."
+          ]
+        },
+        {
+          title:"Predictive Modeling",
+          icon:"fa-robot",
+          lines:[
+            "Create models to forecast sales, demand, churn, or risks.",
+            "Regression, classification, and time-series analysis."
+          ]
+        },
+        {
+          title:"Custom AI Applications",
+          icon:"fa-wand-magic-sparkles",
+          lines:[
+            "AI-driven chatbots for customer support.",
+            "AI in healthcare (diagnostics, patient risk prediction).",
+            "AI in finance (credit scoring, algorithmic trading)."
+          ]
+        },
+        {
+          title:"Data Pipeline Development",
+          icon:"fa-code-branch",
+          lines:[
+            "Design and implement ETL/ELT processes.",
+            "Build scalable data pipelines with Airflow and Docker."
+          ]
+        },
+        {
+          title:"Database Management",
+          icon:"fa-server",
+          lines:[
+            "Design and optimize database schemas.",
+            "Implement efficient data storage and retrieval systems."
+          ]
+        }
+      ];
+
+      return (
+        <section id="services">
+          <DiamondFlow />
+          <div className="content-wrapper">
+            <SectionTitle kicker="Services" title="What I Do" sub="Comprehensive data solutions tailored to your needs" showNav={true} />
+            <div className="services">
+              {items.map((s,idx)=>(
+                <article className="card service fade-in" key={idx} style={{animationDelay: `${idx * 0.1}s`}}>
+                  <h3><i className={`fa-solid ${s.icon}`}></i>{s.title}</h3>
+                  {s.lines.map((l,i)=><p key={i}>• {l}</p>)}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Projects(){
+      const tabs = [
+        {
+          key:"imgproc",
+          label:"Image Processing App",
+          name:"IMAGE PROCESSING APP",
+          desc:`The app allows users to load images, apply various operations (e.g., basic, color, histogram, filters,
+          noise, thresholding, morphology), and save the results. It features a sidebar for navigation, a tabbed interface
+          for different processing categories, and a display area for original and processed images, with operations
+          visualized using matplotlib.`,
+          technologies: ["Python", "OpenCV", "Matplotlib", "Tkinter"]
+        },
+        {
+          key:"amazon",
+          label:"Amazon Data (Docker/Airflow)",
+          name:"AMAZON DATA ANALYSIS USING DOCKER",
+          desc:`This code defines an Apache Airflow DAG (amazon_spend_processing) for processing Amazon spend data.
+          The workflow includes tasks to extract data from a CSV file, assess data quality, clean the data by handling
+          missing values and standardizing formats, create visualizations (e.g., spending by agency, correlation heatmap),
+          implement K-means clustering, create a SQLite database, and load the clustered data into the database.`,
+          technologies: ["Python", "Apache Airflow", "Docker", "SQL", "Data Visualization"]
+        },
+        {
+          key:"drugsdataset",
+          label:"Drugs Prediction",
+          name:"DRUGS CLASSIFIER MACHINE LEARNING MODEL",
+          desc:`This project implements a machine learning pipeline for drug classification using a dataset with features like Age, Sex, BP, Cholesterol, and Na_to_K. 
+          The workflow includes data preprocessing with LabelEncoder and StandardScaler, model training with algorithms like Logistic Regression,
+           XGBoost, and CatBoost, and evaluation using accuracy, confusion matrix, and F1-score, with a heatmap visualization for the XGBoost model.`,
+          technologies: ["Python", "Machine Learning", "XGBoost", "CatBoost", "Scikit-learn"]
+        },
+        {
+          key:"titanic",
+          label:"Titanic Prediction",
+          name:"TITANIC PREDICTION USING LOGISTIC REGRESSION",
+          desc:`This project develops a Logistic Regression model to predict Titanic survival using features like Pclass, Sex, Age, and Fare. 
+          The workflow includes data preprocessing with LabelEncoder, model training, and evaluation with accuracy (79.89%), precision (74.24%), 
+          recall (72.06%), F1-score (73.13%), and a detailed classification report.`,
+          technologies: ["Python", "Logistic Regression", "Data Preprocessing", "Model Evaluation"]
+        }
+      ];
+      const [active,setActive] = useState(tabs[0].key);
+      const current = tabs.find(t=>t.key===active);
+
+      return (
+        <section id="projects">
+          <DiamondFlow />
+          <div className="content-wrapper">
+            <SectionTitle kicker="Projects" title="My Projects" sub="A showcase of my recent data science and engineering projects" showNav={true} />
+            <div className="tabs" role="tablist" aria-label="Project Tabs">
+              {tabs.map(t=>(
+                <button
+                  key={t.key}
+                  className="tab"
+                  role="tab"
+                  aria-selected={active===t.key}
+                  onClick={()=>setActive(t.key)}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+            <article className="card fade-in">
+              <h3 className="proj-name">{current.name}</h3>
+              <p className="proj-desc">{current.desc}</p>
+              <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px'}}>
+                {current.technologies.map((tech, index) => (
+                  <span key={index} style={{
+                    background: 'rgba(255,122,0,0.1)',
+                    color: 'var(--accent)',
+                    padding: '6px 12px',
+                    borderRadius: '20px',
+                    fontSize: '0.85rem',
+                    fontWeight: '600'
+                  }}>{tech}</span>
+                ))}
+              </div>
+            </article>
+          </div>
+        </section>
+      );
+    }
+
+    function Contact(){
+      const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+      });
+      
+      const [isSubmitting, setIsSubmitting] = useState(false);
+      
+      const handleChange = (e) => {
+        setFormData({
+          ...formData,
+          [e.target.id]: e.target.value
+        });
+      };
+      
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        
+        // Simulate form submission
+        setTimeout(() => {
+          alert('Thank you for your message! I will get back to you soon.');
+          setFormData({ name: '', email: '', message: '' });
+          setIsSubmitting(false);
+        }, 1000);
+      };
+      
+      return (
+        <section id="contact">
+          <DiamondFlow />
+          <div className="content-wrapper">
+            <SectionTitle kicker="Contact" title="Get In Touch" sub="Let's discuss how I can help with your data needs" showNav={true} />
+            <div className="contact">
+              <div>
+                <form onSubmit={handleSubmit}>
+                  <div className="field">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      className="input"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      className="input"
+                      placeholder="Your email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="msg">Message</label>
+                    <textarea
+                      id="msg"
+                      className="textarea"
+                      placeholder="How can I help you?"
+                      rows="5"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="btn accent" disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending...' : 'Send Message'} <i className="fa-regular fa-paper-plane"></i>
+                  </button>
+                </form>
+              </div>
+              <div>
+                <p className="muted" style={{marginBottom:24}}>Feel free to reach out for collaboration or just to say hello!</p>
+                
+                <a href="mailto:malekwaleed09@gmail.com" className="pill">
+                  <i className="fa-regular fa-envelope"></i>
+                  <span>malekwaleed09@gmail.com</span>
+                </a>
+                
+                <a href="https://wa.me/201200703062" target="_blank" rel="noreferrer" className="pill">
+                  <i className="fa-brands fa-whatsapp"></i>
+                  <span>+20 120 070 3062</span>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/malek-waleed12" target="_blank" rel="noreferrer" className="pill">
+                  <i className="fa-brands fa-linkedin-in"></i>
+                  <span>LinkedIn</span>
+                </a>
+                
+                <a href="https://github.com/malekwaleed09" target="_blank" rel="noreferrer" className="pill">
+                  <i className="fa-brands fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Footer(){
+      return (
+        <footer>
+          <p>&copy; {new Date().getFullYear()} Malek Waleed. All rights reserved.</p>
+        </footer>
+      );
+    }
+
+    function App(){
+      const [scrollTop, setScrollTop] = useState(false);
+      
+      useEffect(() => {
+        const handleScroll = () => {
+          setScrollTop(window.scrollY > 300);
+          
+          // Nav shadow on scroll
+          const nav = document.querySelector('.nav');
+          if (window.scrollY > 10) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
+        };
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const links = document.querySelector('.links');
+        
+        if (menuToggle && links) {
+          menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            links.classList.toggle('open');
+          });
+        }
+        
+        window.addEventListener('scroll', handleScroll);
+        
+        // Create diamonds on load
+        const container = document.querySelector('.diamond-flow');
+        if (container) {
+          container.innerHTML = '';
+          
+          const width = container.offsetWidth;
+          const height = container.offsetHeight;
+          const diamondCount = Math.floor((width * height) / 2000); 
+          
+          for (let i = 0; i < diamondCount; i++) {
+            const diamond = document.createElement('div');
+            diamond.className = 'diamond';
+            
+            const left = Math.random() * 100;
+            const delay = Math.random() * 15; 
+            const duration = 15 + Math.random() * 10; 
+            
+            diamond.style.left = `${left}%`;
+            diamond.style.animationDelay = `${delay}s`;
+            diamond.style.animationDuration = `${duration}s`;
+            
+            const size = 8 + Math.random() * 8;
+            diamond.style.width = `${size}px`;
+            diamond.style.height = `${size}px`;
+            
+            container.appendChild(diamond);
+          }
+        }
+        
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+      
+      const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+      
+      return (
+        <>
+          <Hero />
+          <About />
+          <Skills />
+          <Services />
+          <Projects />
+          <Contact />
+          <Footer />
+          
+          <button 
+            className={`scroll-top ${scrollTop ? 'visible' : ''}`} 
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+          >
+            <i className="fas fa-arrow-up"></i>
+          </button>
+        </>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
